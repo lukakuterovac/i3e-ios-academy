@@ -14,12 +14,12 @@ struct TweetModel: Identifiable {
     let username: String
     let date: Date
     let image: String
-    let isFavorite: Bool
+    var isFavorite: Bool
 }
 
 
 struct Tweet: View {
-    let tweet: TweetModel
+    @Binding var tweet: TweetModel
     
     var body: some View {
         HStack{
@@ -27,13 +27,18 @@ struct Tweet: View {
                 .resizable()
                 .frame(width: 55, height: 55)
                 .clipShape(Circle())
-            VStack{
-                Text(tweet.username)
+            VStack(alignment: .leading){
+                Text(tweet.username.isEmpty ? "user" : tweet.username)
                 Text(tweet.content)
                 Text(tweet.date, style: .relative)
             }
+            
             Spacer()
-            Button(action: {}) {
+            
+            Button(action: {
+                tweet.isFavorite.toggle()
+                
+            }) {
                 if tweet.isFavorite {
                     Image(systemName: "heart.fill")
                         .foregroundColor(.red)
@@ -50,13 +55,13 @@ struct Tweet: View {
 
 struct Tweet_Previews: PreviewProvider {
     static var previews: some View {
-        Tweet(tweet: TweetModel(
+        Tweet(tweet: Binding.constant(TweetModel(
             content: "Tweet 1",
             username: "username",
             date: Date(),
-            image: "crow",
+            image: "bird",
             isFavorite: true
-        )
+        ))
         )
     }
 }

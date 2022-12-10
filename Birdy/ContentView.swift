@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
         
-    let tweets: [TweetModel] = [
+    @State var tweets: [TweetModel] = [
         TweetModel(
             content: "Tweet 1",
             username: "username",
@@ -25,22 +25,50 @@ struct ContentView: View {
             isFavorite: false
         ),
     ]
+    @State var username = ""
+    @State var content: String = ""
+    @State var isLoginViewPresented = false
     
     var body: some View {
         VStack {
             HStack{
-                Text("Birdy")
+                Text(username.isEmpty ? "Birdy" : "Welcome, " + username)
                     .font(.title)
                 Spacer()
-                Button(action: {}) {
+                Button(action: { isLoginViewPresented = true }) {
                     Text("Login")
                 }
             }
-            List(tweets){ tweet in
+            List($tweets){ tweet in
                 Tweet(tweet: tweet)
             }.listStyle(.plain)
         }
         .padding()
+        
+        HStack {
+            TextField("Content", text: $content)
+                .textFieldStyle(.roundedBorder)
+                .multilineTextAlignment(.center)
+                .autocapitalization(.none)
+            Button(action: {
+                tweets.append(TweetModel(
+                    content: content,
+                    username: username,
+                    date: Date(),
+                    image: "bird",
+                    isFavorite: false))
+            }) {
+                Image(systemName: "plus")
+                Text("New Tweet")
+            }
+            .disabled(content.isEmpty)
+        }
+        .padding()
+        .sheet(isPresented: $isLoginViewPresented) {
+            LoginView(
+                username: $username,
+                isPresented: $isLoginViewPresented)
+        }
     }
 }
 

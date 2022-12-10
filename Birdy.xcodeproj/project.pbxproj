@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6974C3422944BB8F00A92A94 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974C3412944BB8F00A92A94 /* LoginView.swift */; };
 		69CAB5432943D79C00043014 /* BirdyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CAB5422943D79C00043014 /* BirdyApp.swift */; };
 		69CAB5452943D79C00043014 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CAB5442943D79C00043014 /* ContentView.swift */; };
 		69CAB5472943D79D00043014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69CAB5462943D79D00043014 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6974C3412944BB8F00A92A94 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		69CAB53F2943D79C00043014 /* Birdy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Birdy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69CAB5422943D79C00043014 /* BirdyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdyApp.swift; sourceTree = "<group>"; };
 		69CAB5442943D79C00043014 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,9 +57,10 @@
 			children = (
 				69CAB5422943D79C00043014 /* BirdyApp.swift */,
 				69CAB5442943D79C00043014 /* ContentView.swift */,
-				69CAB5502943D7EA00043014 /* Tweet.swift */,
 				69CAB5462943D79D00043014 /* Assets.xcassets */,
 				69CAB5482943D79D00043014 /* Preview Content */,
+				69CAB5502943D7EA00043014 /* Tweet.swift */,
+				6974C3412944BB8F00A92A94 /* LoginView.swift */,
 			);
 			path = Birdy;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			files = (
 				69CAB5512943D7EA00043014 /* Tweet.swift in Sources */,
 				69CAB5452943D79C00043014 /* ContentView.swift in Sources */,
+				6974C3422944BB8F00A92A94 /* LoginView.swift in Sources */,
 				69CAB5432943D79C00043014 /* BirdyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +275,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Birdy/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -299,6 +304,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Birdy/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
