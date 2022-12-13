@@ -8,72 +8,58 @@
 import SwiftUI
 
 struct ContentView: View {
-        
-    @State var tweets: [TweetModel] = [
-        TweetModel(
-            content: "Tweet 1",
-            username: "username",
-            date: Date(),
-            image: "bird",
-            isFavorite: true
-        ),
-        TweetModel(
-            content: "Tweet 2",
-            username: "username",
-            date: Date(),
-            image: "bird",
-            isFavorite: false
-        ),
-    ]
-    @State var username = ""
+    
+    @EnvironmentObject var tweetData: TweetData
+    @EnvironmentObject var userData: UserData
     @State var content: String = ""
     @State var isLoginViewPresented = false
     
     var body: some View {
         VStack {
             HStack{
-                Text(username.isEmpty ? "Birdy" : "Welcome, " + username)
+                Text(userData.username.isEmpty ? "Birdy" : "Welcome, " + userData.username)
                     .font(.title)
+                    .fontWeight(.bold)
                 Spacer()
                 Button(action: { isLoginViewPresented = true }) {
                     Text("Login")
                 }
             }
-            List($tweets){ tweet in
+            List($tweetData.tweets){ tweet in
                 Tweet(tweet: tweet)
             }.listStyle(.plain)
-        }
-        .padding()
-        
-        HStack {
-            TextField("Content", text: $content)
-                .textFieldStyle(.roundedBorder)
-                .multilineTextAlignment(.center)
-                .autocapitalization(.none)
-            Button(action: {
-                tweets.append(TweetModel(
-                    content: content,
-                    username: username,
-                    date: Date(),
-                    image: "bird",
-                    isFavorite: false))
-            }) {
-                Image(systemName: "plus")
-                Text("New Tweet")
+            HStack {
+                TextField("Content", text: $content)
+                    .textFieldStyle(.roundedBorder)
+                    .multilineTextAlignment(.center)
+                    .autocapitalization(.none)
+                Button(action: {
+                    tweetData.tweets.append(TweetModel(
+                        content: content,
+                        username: userData.username,
+                        date: Date(),
+                        image: "bird"))
+                }) {
+                    Image(systemName: "plus")
+                    Text("New Tweet")
+                }
+                .disabled(content.isEmpty)
             }
-            .disabled(content.isEmpty)
+            .padding()
+            .sheet(isPresented: $isLoginViewPresented) {
+                LoginView(
+                    username: $userData.username,
+                    isPresented: $isLoginViewPresented)
+            }
         }
         .padding()
-        .sheet(isPresented: $isLoginViewPresented) {
-            LoginView(
-                username: $username,
-                isPresented: $isLoginViewPresented)
-        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(TweetData())
+            .environmentObject(UserData())
     }
 }

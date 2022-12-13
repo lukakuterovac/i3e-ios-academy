@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct TweetModel: Identifiable {
-    var id = UUID()
+    var id = UUID().uuidString
     
     let content: String
     let username: String
     let date: Date
     let image: String
-    var isFavorite: Bool
 }
 
 
 struct Tweet: View {
     @Binding var tweet: TweetModel
+    @EnvironmentObject var userData: UserData
     
     var body: some View {
         HStack{
@@ -36,10 +36,13 @@ struct Tweet: View {
             Spacer()
             
             Button(action: {
-                tweet.isFavorite.toggle()
-                
+                if userData.favoriteTweets.contains(tweet.id) {
+                    userData.favoriteTweets.remove(tweet.id)
+                } else {
+                    userData.favoriteTweets.insert(tweet.id)
+                }
             }) {
-                if tweet.isFavorite {
+                if userData.favoriteTweets.contains(tweet.id) {
                     Image(systemName: "heart.fill")
                         .foregroundColor(.red)
 
@@ -59,9 +62,8 @@ struct Tweet_Previews: PreviewProvider {
             content: "Tweet 1",
             username: "username",
             date: Date(),
-            image: "bird",
-            isFavorite: true
+            image: "bird"
         ))
-        )
+        ).environmentObject(TweetData())
     }
 }
