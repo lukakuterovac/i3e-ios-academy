@@ -38,7 +38,7 @@ struct ContentView: View {
                         content: content,
                         username: userData.username,
                         date: Date(),
-                        image: "bird"))
+                        imageURL: IMAGE_URL))
                 }) {
                     Image(systemName: "plus")
                     Text("New Tweet")
