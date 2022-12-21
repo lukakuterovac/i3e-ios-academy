@@ -34,11 +34,18 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .autocapitalization(.none)
                 Button(action: {
-                    tweetData.tweets.append(TweetModel(
+                    let tweet = TweetModel(
                         content: content,
                         username: userData.username,
                         date: Date(),
-                        imageURL: IMAGE_URL))
+                        imageURL: IMAGE_URL
+                    )
+                    
+                    Task {
+                        await tweetData.sendTweet(tweet: tweet)
+                        await tweetData.fetchTweets()
+                    }
+                    
                 }) {
                     Image(systemName: "plus")
                     Text("New Tweet")
